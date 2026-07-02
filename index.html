@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ДентАрт — журнал про науку та мистецтво в стоматології</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prata&family=Literata:ital,opsz,wght@0,7..72,300;0,7..72,400;0,7..72,500;1,7..72,400&family=Manrope:wght@400;500;600;700&display=swap&subset=cyrillic" rel="stylesheet">
+<style>
+:root{
+  --ink:#1F1B16;
+  --ink-soft:#4A443C;
+  --paper:#F6F2E9;
+  --paper-deep:#EFE9DC;
+  --bordeaux:#6B222E;
+  --bordeaux-deep:#511620;
+  --gold:#B58A4A;
+  --incisal:#93A7B2;
+  --line:rgba(31,27,22,.16);
+  --line-strong:rgba(31,27,22,.4);
+  --display:'Prata',serif;
+  --body:'Literata',serif;
+  --ui:'Manrope',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:17px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible{outline:2px solid var(--bordeaux);outline-offset:3px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 40px}
+@media(max-width:720px){.wrap{padding:0 20px}}
+
+/* ---------- shade guide strip (signature) ---------- */
+.shade-strip{display:flex;height:8px}
+.shade-strip span{flex:1}
+.shade-strip .a1{background:#EDE4D3}.shade-strip .a2{background:#E4D5BB}
+.shade-strip .a3{background:#D9C29D}.shade-strip .a35{background:#CDAF83}
+.shade-strip .b1{background:#EAE2CC}.shade-strip .b2{background:#DFD1AC}
+.shade-strip .c1{background:#D8D2C2}.shade-strip .c2{background:#C7BDA6}
+.shade-strip .d2{background:#D5CCC0}.shade-strip .d3{background:#C4B6A4}
+.shade-strip .inc{background:#AEBEC7}
+
+.shade-legend{display:flex;font-family:var(--ui);font-size:9px;letter-spacing:.18em;color:var(--ink-soft)}
+.shade-legend span{flex:1;text-align:center;padding-top:5px}
+@media(max-width:720px){.shade-legend{display:none}}
+
+/* ---------- top bar ---------- */
+.topbar{border-bottom:1px solid var(--line);font-family:var(--ui);font-size:12px;letter-spacing:.08em}
+.topbar .wrap{display:flex;justify-content:space-between;align-items:center;height:38px}
+.topbar .issue-note{color:var(--ink-soft)}
+.topbar .lang a{padding:0 6px;color:var(--ink-soft)}
+.topbar .lang a.active{color:var(--ink);font-weight:700}
+
+/* ---------- masthead ---------- */
+.masthead{padding:42px 0 30px;text-align:center;border-bottom:1px solid var(--line-strong);position:relative}
+.masthead h1{
+  font-family:var(--display);
+  font-size:clamp(56px,9vw,116px);
+  font-weight:400;
+  line-height:.95;
+  letter-spacing:.01em;
+}
+.masthead h1 .art{color:var(--bordeaux)}
+.masthead .tagline{
+  margin-top:14px;
+  font-family:var(--ui);
+  font-size:12px;
+  letter-spacing:.34em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+}
+.masthead .est{
+  position:absolute;left:40px;top:50%;transform:translateY(-50%);
+  font-family:var(--ui);font-size:11px;letter-spacing:.2em;color:var(--ink-soft);
+  writing-mode:vertical-rl;
+}
+.masthead .assoc{
+  position:absolute;right:40px;top:50%;transform:translateY(-50%);
+  font-family:var(--ui);font-size:11px;letter-spacing:.2em;color:var(--ink-soft);
+  writing-mode:vertical-rl;
+}
+@media(max-width:900px){.masthead .est,.masthead .assoc{display:none}}
+
+/* ---------- nav ---------- */
+.nav{border-bottom:1px solid var(--line-strong);position:sticky;top:0;background:var(--paper);z-index:50}
+.nav ul{display:flex;justify-content:center;gap:8px;list-style:none;flex-wrap:wrap}
+.nav a{
+  display:block;padding:14px 18px;
+  font-family:var(--ui);font-size:13px;font-weight:600;
+  letter-spacing:.14em;text-transform:uppercase;
+  transition:color .2s;
+}
+.nav a:hover{color:var(--bordeaux)}
+.nav a.subscribe{color:var(--bordeaux)}
+
+/* ---------- hero : golden ratio split ---------- */
+.hero{border-bottom:1px solid var(--line)}
+.hero .wrap{
+  display:grid;
+  grid-template-columns:61.8fr 38.2fr; /* золотий перетин */
+  min-height:560px;
+}
+.hero-left{padding:72px 64px 72px 0;border-right:1px solid var(--line);display:flex;flex-direction:column;justify-content:center}
+.hero-eyebrow{
+  font-family:var(--ui);font-size:12px;font-weight:700;
+  letter-spacing:.26em;text-transform:uppercase;color:var(--bordeaux);
+  margin-bottom:26px;
+}
+.hero-eyebrow::after{content:"";display:block;width:56px;height:1px;background:var(--bordeaux);margin-top:12px}
+.hero h2{
+  font-family:var(--display);
+  font-size:clamp(34px,4.2vw,56px);
+  font-weight:400;line-height:1.14;
+  margin-bottom:26px;
+}
+.hero p{font-size:18px;color:var(--ink-soft);max-width:52ch;margin-bottom:38px}
+.hero-actions{display:flex;gap:16px;flex-wrap:wrap}
+.btn{
+  font-family:var(--ui);font-size:13px;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;
+  padding:16px 30px;border:1px solid var(--ink);
+  transition:background .2s,color .2s,border-color .2s;
+  cursor:pointer;background:transparent;
+}
+.btn-primary{background:var(--bordeaux);border-color:var(--bordeaux);color:var(--paper)}
+.btn-primary:hover{background:var(--bordeaux-deep);border-color:var(--bordeaux-deep)}
+.btn-ghost:hover{background:var(--ink);color:var(--paper)}
+
+/* the "cover" */
+.hero-right{display:flex;align-items:center;justify-content:center;padding:56px 0 56px 56px}
+.cover{
+  width:min(340px,100%);
+  aspect-ratio:1/1.414; /* A4 */
+  background:linear-gradient(168deg,#F2ECDD 0%,#E7DCC4 34%,#CBB48C 68%,#9FB0BA 100%);
+  box-shadow:24px 28px 60px rgba(31,27,22,.22), 0 0 0 1px rgba(31,27,22,.12);
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;
+}
+.cover::before{ /* spine */
+  content:"";position:absolute;left:0;top:0;bottom:0;width:12px;
+  background:linear-gradient(90deg,var(--bordeaux-deep),var(--bordeaux));
+}
+.cover-head{padding:26px 24px 0 34px}
+.cover-head .t{font-family:var(--display);font-size:34px;line-height:1}
+.cover-head .t em{font-style:normal;color:var(--bordeaux)}
+.cover-head .s{font-family:var(--ui);font-size:8px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-soft);margin-top:8px}
+.cover-spiral{flex:1;display:flex;align-items:center;justify-content:center;padding:10px 20px 0 28px}
+.cover-spiral svg{width:100%;height:auto;opacity:.85}
+.cover-foot{display:flex;justify-content:space-between;align-items:flex-end;padding:0 24px 22px 34px;font-family:var(--ui);font-size:10px;letter-spacing:.16em;color:var(--ink-soft)}
+.cover-foot .num{font-family:var(--display);font-size:26px;color:var(--ink);letter-spacing:0}
+@media(max-width:960px){
+  .hero .wrap{grid-template-columns:1fr;min-height:0}
+  .hero-left{border-right:none;padding:56px 0 40px}
+  .hero-right{padding:0 0 56px;justify-content:flex-start}
+}
+
+/* ---------- section head ---------- */
+.section{padding:84px 0}
+.section-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:48px;gap:20px;flex-wrap:wrap}
+.section-head h3{font-family:var(--display);font-size:clamp(28px,3.4vw,42px);font-weight:400}
+.section-head .more{font-family:var(--ui);font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--bordeaux);border-bottom:1px solid var(--bordeaux);padding-bottom:3px}
+
+/* ---------- contents / articles ---------- */
+.articles{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line-strong)}
+.article{padding:34px 30px 40px;border-bottom:1px solid var(--line);border-right:1px solid var(--line);transition:background .25s}
+.article:nth-child(3n){border-right:none}
+.article:hover{background:var(--paper-deep)}
+.article .rubric{font-family:var(--ui);font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--bordeaux);margin-bottom:16px}
+.article h4{font-family:var(--display);font-size:22px;font-weight:400;line-height:1.3;margin-bottom:14px}
+.article p{font-size:15px;color:var(--ink-soft);margin-bottom:20px}
+.article .author{font-family:var(--ui);font-size:12px;letter-spacing:.06em;color:var(--ink-soft)}
+.article .author b{color:var(--ink);font-weight:600}
+.article .pages{float:right;font-family:var(--ui);font-size:12px;color:var(--gold)}
+@media(max-width:960px){.articles{grid-template-columns:1fr 1fr}.article:nth-child(3n){border-right:1px solid var(--line)}.article:nth-child(2n){border-right:none}}
+@media(max-width:640px){.articles{grid-template-columns:1fr}.article{border-right:none!important;padding:28px 4px 32px}}
+
+/* ---------- quote band ---------- */
+.quote-band{background:var(--bordeaux);color:var(--paper);padding:88px 0;text-align:center;position:relative;overflow:hidden}
+.quote-band::before{
+  content:"φ";position:absolute;right:6%;top:50%;transform:translateY(-50%);
+  font-family:var(--display);font-size:340px;color:rgba(246,242,233,.06);line-height:1;
+}
+.quote-band blockquote{font-family:var(--display);font-size:clamp(26px,3.6vw,44px);line-height:1.3;max-width:22ch;margin:0 auto 26px}
+.quote-band cite{font-family:var(--ui);font-style:normal;font-size:12px;letter-spacing:.26em;text-transform:uppercase;color:rgba(246,242,233,.7)}
+
+/* ---------- archive shelf ---------- */
+.archive{background:var(--paper-deep)}
+.shelf{display:flex;gap:10px;align-items:flex-end;overflow-x:auto;padding:10px 2px 26px;scrollbar-width:thin}
+.spine{
+  flex:0 0 auto;width:64px;height:210px;
+  display:flex;flex-direction:column;justify-content:space-between;align-items:center;
+  padding:16px 0 14px;
+  background:linear-gradient(180deg,#7A2A37,#5E1C28);
+  color:var(--paper);box-shadow:inset -6px 0 10px rgba(0,0,0,.22), 3px 4px 10px rgba(31,27,22,.22);
+  transition:transform .25s;
+}
+.spine:nth-child(2n){background:linear-gradient(180deg,#2E2A24,#1F1B16)}
+.spine:nth-child(3n){background:linear-gradient(180deg,#C09456,#A47A3E);color:var(--ink)}
+.spine:hover{transform:translateY(-10px)}
+.spine .y{writing-mode:vertical-rl;font-family:var(--ui);font-size:13px;font-weight:700;letter-spacing:.3em}
+.spine .m{font-family:var(--display);font-size:11px}
+.archive-note{font-family:var(--ui);font-size:13px;color:var(--ink-soft);margin-top:8px}
+
+/* ---------- subscribe ---------- */
+.subscribe-grid{display:grid;grid-template-columns:38.2fr 61.8fr;gap:64px;align-items:center}
+.sub-card{border:1px solid var(--line-strong);padding:44px 40px;background:var(--paper)}
+.sub-card .price{font-family:var(--display);font-size:52px;line-height:1}
+.sub-card .per{font-family:var(--ui);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);margin:8px 0 24px}
+.sub-card ul{list-style:none;margin-bottom:30px}
+.sub-card li{padding:10px 0;border-bottom:1px solid var(--line);font-size:15px}
+.sub-card li::before{content:"— ";color:var(--gold)}
+.subscribe-text h3{font-family:var(--display);font-size:clamp(28px,3.4vw,42px);font-weight:400;margin-bottom:22px}
+.subscribe-text p{color:var(--ink-soft);max-width:56ch;margin-bottom:16px}
+@media(max-width:960px){.subscribe-grid{grid-template-columns:1fr;gap:40px}}
+
+/* ---------- about ---------- */
+.about-grid{display:grid;grid-template-columns:61.8fr 38.2fr;gap:64px}
+.about-text p{margin-bottom:18px;color:var(--ink-soft)}
+.about-text p:first-child{font-size:21px;color:var(--ink);font-family:var(--body);font-weight:300}
+.board{border-left:1px solid var(--line-strong);padding-left:40px}
+.board h4{font-family:var(--ui);font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--bordeaux);margin-bottom:20px}
+.board li{list-style:none;padding:9px 0;border-bottom:1px solid var(--line);font-size:15px}
+.board li span{display:block;font-family:var(--ui);font-size:12px;color:var(--ink-soft)}
+@media(max-width:960px){.about-grid{grid-template-columns:1fr}.board{border-left:none;padding-left:0;border-top:1px solid var(--line-strong);padding-top:32px}}
+
+/* ---------- footer ---------- */
+footer{background:var(--ink);color:var(--paper);padding:64px 0 40px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px;margin-bottom:48px}
+footer .fm{font-family:var(--display);font-size:34px;margin-bottom:12px}
+footer .fm em{font-style:normal;color:var(--gold)}
+footer p,footer a{font-size:14px;color:rgba(246,242,233,.66)}
+footer a:hover{color:var(--paper)}
+footer h5{font-family:var(--ui);font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+footer li{list-style:none;padding:5px 0}
+.footer-bottom{border-top:1px solid rgba(246,242,233,.14);padding-top:24px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:var(--ui);font-size:12px;color:rgba(246,242,233,.5)}
+@media(max-width:840px){.footer-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="shade-strip" aria-hidden="true">
+  <span class="a1"></span><span class="a2"></span><span class="a3"></span><span class="a35"></span>
+  <span class="b1"></span><span class="b2"></span><span class="c1"></span><span class="c2"></span>
+  <span class="d2"></span><span class="d3"></span><span class="inc"></span>
+</div>
+
+<div class="topbar">
+  <div class="wrap">
+    <span class="issue-note">Виходить щоквартально з 1996 року · Полтава, Україна</span>
+    <span class="lang"><a href="#" class="active">УКР</a>·<a href="#">ENG</a></span>
+  </div>
+</div>
+
+<header class="masthead">
+  <span class="est">ЗАСНОВАНО 1996</span>
+  <h1>Дент<span class="art">Арт</span></h1>
+  <p class="tagline">Журнал про науку та мистецтво в стоматології</p>
+  <span class="assoc">СХВАЛЕНО АСУ</span>
+</header>
+
+<nav class="nav" aria-label="Головна навігація">
+  <ul class="wrap">
+    <li><a href="#issue">Свіжий номер</a></li>
+    <li><a href="#archive">Архів</a></li>
+    <li><a href="#about">Про журнал</a></li>
+    <li><a href="#authors">Авторам</a></li>
+    <li><a href="#seminars">Семінари</a></li>
+    <li><a href="#subscribe" class="subscribe">Передплата</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="issue">
+  <div class="wrap">
+    <div class="hero-left">
+      <p class="hero-eyebrow">№ 2 (118) · 2026</p>
+      <h2>Естетика — це передусім математика</h2>
+      <p>Тридцятий рік поспіль ДентАрт досліджує, як наука про пропорції, оптику та біомеханіку перетворює реставрацію зуба на витвір мистецтва. У свіжому номері — пряма реставрація, ендодонтія та гостьова розмова з майстром.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#subscribe">Передплатити журнал</a>
+        <a class="btn btn-ghost" href="#contents">Зміст номера</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="cover" role="img" aria-label="Обкладинка свіжого номера ДентАрт">
+        <div class="cover-head">
+          <div class="t">Дент<em>Арт</em></div>
+          <div class="s">Наука та мистецтво в стоматології</div>
+        </div>
+        <div class="cover-spiral">
+          <svg viewBox="-6 -6 271 172" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <g fill="none" stroke="#6B222E">
+              <rect x="0" y="0" width="259" height="160" stroke-width="1" opacity=".4"/>
+              <line x1="160" y1="0" x2="160" y2="160" stroke-width="1" opacity=".4"/>
+              <line x1="160" y1="99" x2="259" y2="99" stroke-width="1" opacity=".4"/>
+              <line x1="198" y1="99" x2="198" y2="160" stroke-width="1" opacity=".4"/>
+              <line x1="160" y1="122" x2="198" y2="122" stroke-width="1" opacity=".4"/>
+              <path d="M0,160 A160,160 0 0 1 160,0
+                       A99,99 0 0 1 259,99
+                       A61,61 0 0 1 198,160
+                       A38,38 0 0 1 160,122" stroke-width="2"/>
+              <circle cx="160" cy="122" r="2.5" fill="#6B222E" stroke="none"/>
+            </g>
+          </svg>
+        </div>
+        <div class="cover-foot">
+          <span>КВІТЕНЬ — ЧЕРВЕНЬ<br>2026</span>
+          <span class="num">№2<span style="font-size:12px;color:var(--ink-soft)"> (118)</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="contents">
+  <div class="wrap">
+    <div class="section-head">
+      <h3>У цьому номері</h3>
+      <a class="more" href="#">Повний зміст номера</a>
+    </div>
+    <div class="articles">
+      <article class="article">
+        <p class="rubric">Пряма реставрація</p>
+        <h4>Оптична модель тканин зуба: від спостереження до відтворення</h4>
+        <p>Як тришарова архітектура композита відтворює гру світла в емалі та дентині природного зуба.</p>
+        <p class="author"><span class="pages">с. 8–21</span><b>Сергій Радлінський</b><br>Полтава, Україна</p>
+      </article>
+      <article class="article">
+        <p class="rubric">Ендодонтія</p>
+        <h4>Іригація кореневих каналів: що насправді має значення</h4>
+        <p>Огляд сучасних протоколів активації іригантів і критичний погляд на клінічні докази.</p>
+        <p class="author"><span class="pages">с. 22–33</span><b>Станіслав Геранін</b><br>Полтава, Україна</p>
+      </article>
+      <article class="article">
+        <p class="rubric">Гостьова</p>
+        <h4>«Єдине обмеження — відсутність фантазії»</h4>
+        <p>Розмова про адгезивну стоматологію, мінімальну інвазію та естетику як спосіб мислення.</p>
+        <p class="author"><span class="pages">с. 34–45</span><b>Гість номера</b><br>Європа</p>
+      </article>
+      <article class="article">
+        <p class="rubric">Біомеханіка</p>
+        <h4>Спіральна біосиметрія емалі: прихована геометрія зуба</h4>
+        <p>Продовження циклу про формоутворення зубів людини з погляду спіральної біосиметрії.</p>
+        <p class="author"><span class="pages">с. 46–57</span><b>Юрій Костиленко</b><br>Полтава, Україна</p>
+      </article>
+      <article class="article">
+        <p class="rubric">Пародонтологія</p>
+        <h4>Рожева естетика: керування контуром ясен у фронтальній ділянці</h4>
+        <p>Клінічні алгоритми досягнення гармонії білого та рожевого в зоні посмішки.</p>
+        <p class="author"><span class="pages">с. 58–69</span><b>Тетяна Петрушанко</b><br>Полтава, Україна</p>
+      </article>
+      <article class="article">
+        <p class="rubric">Семінари</p>
+        <h4>Осінній семінар ДентАрт: репортаж і головні тези</h4>
+        <p>Полтава знову зібрала лікарів, які шукають знань і натхнення. Про що говорили цього разу.</p>
+        <p class="author"><span class="pages">с. 70–80</span><b>Редакція</b><br>ДентАрт</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<div class="quote-band">
+  <div class="wrap">
+    <blockquote>Естетика — це передусім математика</blockquote>
+    <cite>Сергій Радлінський · головний редактор</cite>
+  </div>
+</div>
+
+<section class="section archive" id="archive">
+  <div class="wrap">
+    <div class="section-head">
+      <h3>Архів номерів</h3>
+      <a class="more" href="#">Усі номери з 1996 року</a>
+    </div>
+    <div class="shelf" aria-label="Полиця з річними комплектами журналу">
+      <a class="spine" href="#"><span class="m">№1–4</span><span class="y">2026</span><span class="m">Дент<br>Арт</span></a>
+      <a class="spine" href="#"><span class="m">№1–4</span><span class="y">2025</span><span class="m">Дент<br>Арт</span></a>
+      <a class="spine" href="#"><span class="m">№1–4</span><span class="y">2024</span><span class="m">Дент<br>Арт</span></a>
+      <a class="spine" href="#"><span class="m">№1–4</span><span class="y">2023</span><span class="m">Дент<br>Арт</span></a>
+      <a class="spine" href="#"><span class="m">№1–4</span><span class="y">2022</span><span class="m">Дент<br>Арт</span></a>
+      <a class="spine" href="#"><span class="m">№1–4</span><span class="y">2021</span><span class="m">Дент<br>Арт</span></a>
+      <a class="spine" href="#"><span class="m">№1–4</span><span class="y">2020</span><span class="m">Дент<br>Арт</span></a>
+      <a class="spine" href="#"><span class="m">№1–4</span><span class="y">2019</span><span class="m">Дент<br>Арт</span></a>
+      <a class="spine" href="#"><span class="m">№1–4</span><span class="y">2018</span><span class="m">Дент<br>Арт</span></a>
+      <a class="spine" href="#"><span class="m">№1–4</span><span class="y">2017</span><span class="m">Дент<br>Арт</span></a>
+      <a class="spine" href="#"><span class="m">№1–4</span><span class="y">2016</span><span class="m">Дент<br>Арт</span></a>
+      <a class="spine" href="#"><span class="m">№1–4</span><span class="y">2015</span><span class="m">Дент<br>Арт</span></a>
+    </div>
+    <p class="archive-note">Електронний доступ до всіх номерів з 2013 року — через сервіс наших партнерів.</p>
+  </div>
+</section>
+
+<section class="section" id="subscribe">
+  <div class="wrap subscribe-grid">
+    <div class="sub-card">
+      <p class="price">4 номери</p>
+      <p class="per">Річна передплата · друковане видання</p>
+      <ul>
+        <li>Щоквартальний ілюстрований журнал</li>
+        <li>Доставка по Україні</li>
+        <li>Електронний доступ до архіву</li>
+        <li>Знижка на семінари ДентАрт</li>
+      </ul>
+      <a class="btn btn-primary" href="#" style="display:block;text-align:center">Оформити передплату</a>
+    </div>
+    <div class="subscribe-text">
+      <h3>Журнал, який читають повільно</h3>
+      <p>ДентАрт — не стрічка новин. Це щоквартальне видання, де кожна стаття — завершене дослідження з клінічними фотографіями, схемами та висновками, до яких повертаються роками.</p>
+      <p>Передплатіть друковане видання або придбайте окремий номер — і отримайте доступ до електронного архіву.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="about" style="padding-top:0">
+  <div class="wrap about-grid">
+    <div class="about-text">
+      <div class="section-head"><h3>Про журнал</h3></div>
+      <p>ДентАрт виходить у Полтаві з 1996 року і присвячений естетичним аспектам прямої та непрямої реставрації, ортодонтії, ендодонтії, пародонтології та хірургії.</p>
+      <p>Журнал має практичну спрямованість: сучасні технології та матеріали, детальні клінічні протоколи, майстер-класи від провідних фахівців України та світу. Схвалений Асоціацією стоматологів України.</p>
+      <p>Наша редакційна рада об'єднує фахівців з України, Італії, Великої Британії, Грузії, Латвії та Литви.</p>
+    </div>
+    <div class="board">
+      <h4>Редакція</h4>
+      <ul>
+        <li>Сергій Радлінський <span>головний редактор · Полтава</span></li>
+        <li>Марко Феррарі <span>Сієна, Італія</span></li>
+        <li>Пол Даммер <span>Кардіфф, Велика Британія</span></li>
+        <li>Наталія Біденко <span>Київ, Україна</span></li>
+        <li>Тетяна Петрушанко <span>Полтава, Україна</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="shade-strip" aria-hidden="true">
+  <span class="a1"></span><span class="a2"></span><span class="a3"></span><span class="a35"></span>
+  <span class="b1"></span><span class="b2"></span><span class="c1"></span><span class="c2"></span>
+  <span class="d2"></span><span class="d3"></span><span class="inc"></span>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <p class="fm">Дент<em>Арт</em></p>
+        <p>Журнал про науку та мистецтво в стоматології.<br>Виходить щоквартально з 1996 року.</p>
+      </div>
+      <div>
+        <h5>Журнал</h5>
+        <ul>
+          <li><a href="#issue">Свіжий номер</a></li>
+          <li><a href="#archive">Архів</a></li>
+          <li><a href="#subscribe">Передплата</a></li>
+          <li><a href="#authors">Авторам</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Контакти</h5>
+        <ul>
+          <li>вул. О. Оксанченка, 29,<br>Полтава, 36020, Україна</li>
+          <li><a href="tel:+380532630595">+380 (532) 630 595</a></li>
+          <li><a href="mailto:info@dentart.org">info@dentart.org</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 1996–2026 ДентАрт</span>
+      <span>Схвалено Асоціацією стоматологів України</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
