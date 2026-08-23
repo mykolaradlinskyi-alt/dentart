@@ -491,10 +491,32 @@ items=[].slice.call(document.querySelectorAll('.toc li')),
 issues=[].slice.call(document.querySelectorAll('.issue')),
 yearBlocks=[].slice.call(document.querySelectorAll('.year-block')),
 total=items.length, timer;
-function run(){
-var v=q.value.trim().toLowerCase(), shown=0;
+/* Пошук має працювати і українською, і російською: у архіві частина назв
+   і майже всі імена авторів записані мовою оригіналу, а на сторінці
+   показано переклад. Тому обидва боки зводимо до спільної форми. */
+var MAP={'і':'i','и':'i','ы':'i','ї':'i','й':'i','е':'e','є':'e','э':'e','ё':'e',
+'ґ':'g','г':'g','ъ':'','ь':'','щ':'sh','ш':'sh','ч':'ch','ц':'c','я':'ya','ю':'yu',
+'а':'a','б':'b','в':'v','д':'d','ж':'zh','з':'z','к':'k','л':'l','м':'m','н':'n',
+'о':'o','п':'p','р':'r','с':'s','т':'t','у':'u','ф':'f','х':'h'};
+function fold(t){
+var out='',c;
+t=t.toLowerCase();
+for(var i=0;i<t.length;i++){
+c=t.charAt(i);
+if(MAP.hasOwnProperty(c)){out+=MAP[c];}
+else if(/[a-z0-9]/.test(c)){out+=c;}
+else{out+=' ';}
+}
+return out.replace(/\s+/g,' ');
+}
 items.forEach(function(li){
-var hit=!v||li.getAttribute('data-s').indexOf(v)>-1;
+li.__idx=fold((li.getAttribute('data-s')||'')+' '+li.textContent);
+});
+function run(){
+var v=fold(q.value.trim()), shown=0;
+var empty=!q.value.trim();
+items.forEach(function(li){
+var hit=empty||li.__idx.indexOf(v)>-1;
 li.classList.toggle('hidden',!hit); if(hit)shown++;
 });
 issues.forEach(function(s){
@@ -503,8 +525,8 @@ s.classList.toggle('hidden',!s.querySelector('.toc li:not(.hidden)'));
 yearBlocks.forEach(function(b){
 b.classList.toggle('hidden',!b.querySelector('.issue:not(.hidden)'));
 });
-cnt.textContent=v?(shown+' з '+total):'';
-nores.style.display=(v&&!shown)?'block':'none';
+cnt.textContent=empty?'':(shown+' з '+total);
+nores.style.display=(!empty&&!shown)?'block':'none';
 }
 q.addEventListener('input',function(){clearTimeout(timer);timer=setTimeout(run,120)});
 })();
